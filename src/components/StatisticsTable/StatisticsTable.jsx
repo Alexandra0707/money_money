@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./StatisticsTable.module.css";
+import { getCategories } from "@redux/categories/operations";
+import { selectIsLoggedIn } from "@redux/auth/selectors";
 
 const formatNumber = (number) => {
   return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -11,6 +14,15 @@ const StatisticsTable = ({
   incomeSummaryByPeriod,
   expensesSummaryByPeriod,
 }) => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getCategories());
+    }
+  }, [dispatch, isLoggedIn]);
+
   const getCategoryName = (id) => {
     return categories.find((cat) => cat.id === id)?.name || "Unknown";
   };
