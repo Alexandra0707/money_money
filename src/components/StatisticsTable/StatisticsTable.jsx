@@ -1,5 +1,5 @@
-import React from "react";
-import { useEffect, useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./StatisticsTable.module.css";
 import { getCategories } from "@redux/categories/operations";
 import { selectIsLoggedIn } from "@redux/auth/selectors";
